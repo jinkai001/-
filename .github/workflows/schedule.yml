@@ -1,0 +1,34 @@
+name: Daily Exchange Rate Check
+
+on:
+  schedule:
+    # 这里的难点是时区：GitHub用的是 UTC 时间。
+    # 新加坡/北京是 UTC+8。
+    # 所以：
+    # UTC 1:00 = SGT 9:00 (早上)
+    # UTC 5:00 = SGT 13:00 (中午1点)
+    # UTC 10:00 = SGT 18:00 (下午6点)
+    - cron: '0 1,5,10 * * *'
+  
+  # 允许你手动点击按钮测试（为了调试方便）
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Run script
+        env:
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        run: python main.py
