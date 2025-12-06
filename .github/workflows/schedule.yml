@@ -2,15 +2,9 @@ name: Daily Exchange Rate Check
 
 on:
   schedule:
-    # 这里的难点是时区：GitHub用的是 UTC 时间。
-    # 新加坡/北京是 UTC+8。
-    # 所以：
-    # UTC 1:00 = SGT 9:00 (早上)
-    # UTC 5:00 = SGT 13:00 (中午1点)
-    # UTC 10:00 = SGT 18:00 (下午6点)
+    # 既然你觉得11:35太晚了，我们把时间设得更“偏”一点，避开高峰
+    # 这里设为：每天 9:15, 13:15, 18:15 (SGT)
     - cron: '15 1,5,10 * * *'
-  
-  # 允许你手动点击按钮测试（为了调试方便）
   workflow_dispatch:
 
 jobs:
@@ -25,8 +19,10 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install requests
-        run: pip install requests
+      - name: Install dependencies
+        run: |
+          pip install requests
+          pip install beautifulsoup4
 
       - name: Run script
         env:
