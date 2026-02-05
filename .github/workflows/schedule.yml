@@ -2,9 +2,7 @@ name: Daily Exchange Rate Check
 
 on:
   schedule:
-    # 既然你觉得11:35太晚了，我们把时间设得更“偏”一点，避开高峰
-    # 这里设为：每天 9:15, 13:15, 18:15 (SGT)
-    - cron: '15 1,5,10 * * *'
+  - cron: '25 1,4,10 * * *'
   workflow_dispatch:
 
 jobs:
