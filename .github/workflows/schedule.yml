@@ -3,7 +3,7 @@ name: Daily Exchange Rate Check
 on:
   schedule:
   # 分 时 日 月 周 (UTC时间)
-  - cron: '3 1,4,10 * * *'
+  - cron: '30 0,3,9 * * *'
   workflow_dispatch:
 
 jobs:
