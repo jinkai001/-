@@ -4,7 +4,7 @@ import time
 from bs4 import BeautifulSoup
 
 # 配置区域
-TARGET_RATE = 5.35  # 你的心理价位
+TARGET_RATE = 5.40  # 你的心理价位
 TOKEN = os.environ.get("PUSHPLUS_TOKEN")
 
 def get_boc_rate():
